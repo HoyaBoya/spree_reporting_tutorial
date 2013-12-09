@@ -1,0 +1,5 @@
+en:
+  advanced_reports:
+    unavailable_products:
+      name: Unavailable Products
+      description: A list of all unavailable products by most recently created.
