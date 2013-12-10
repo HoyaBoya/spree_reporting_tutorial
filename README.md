@@ -9,6 +9,21 @@ This gem requires that the following pull request be accepted into Spree Core.
 
 https://github.com/spree/spree/pull/4087
 
+Running Tests
+=============
+
+1) Generate the dummy test app.
+
+```
+bundle exec rake test_app
+```
+
+2) Run the tests.
+
+```
+bundle exec rake spec
+```
+
 Build and Install The Gem
 =========================
 
@@ -25,11 +40,11 @@ There are several things that need to be done in order to create a new report in
 
 ```
 Spree::Admin::ReportsController.class_eval do
-  before_filter :advanced_report_setup, only: [:index]
+  before_filter :advanced_reporting_setup, only: [:index]
 
   ...
 
-  def advanced_report_setup
+  def advanced_reporting_setup
     Spree::Admin::ReportsController.add_available_report! :unavailable_products
   end
 end

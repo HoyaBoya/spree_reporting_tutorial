@@ -1,5 +1,5 @@
 Spree::Admin::ReportsController.class_eval do
-  before_filter :advanced_report_setup, only: [:index]
+  before_filter :advanced_reporting_setup, only: [:index]
 
   def unavailable_products
     params[:q] = {} unless params[:q]
@@ -24,7 +24,7 @@ Spree::Admin::ReportsController.class_eval do
 
   protected
 
-  def advanced_report_setup
+  def advanced_reporting_setup
     Spree::Admin::ReportsController.add_available_report! :unavailable_products
   end
 end
