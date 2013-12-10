@@ -10,3 +10,4 @@ nbproject
 *.swp
 spec/dummy
 coverage
+.ruby-version

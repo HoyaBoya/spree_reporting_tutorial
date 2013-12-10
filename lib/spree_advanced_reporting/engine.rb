@@ -1,7 +1,6 @@
 module Spree
   module AdvancedReporting
     class Engine < Rails::Engine
-      puts "INSIDE HERE"
       require 'spree/core'
       isolate_namespace Spree
       engine_name "spree_advanced_reporting"
@@ -19,14 +18,11 @@ module Spree
 
       def self.activate
         [
-          "../../app/models/spree/advanced_reporting/*.rb",
-          "../../app/controllers/spree/advanced_reporting/*.rb",
-          "../../app/views/spree/advanced_reporting/*.rb",
-          "../../config/**/*routes.rb"
+          "../../app/models/spree/**/*.rb",
+          "../../app/controllers/spree/**/*.rb",
+          "../../config/routes.rb"
         ].each do |directory|
-          puts "LOADING FILES LOCATED IN #{directory}"
           Dir.glob(File.join(File.dirname(__FILE__), directory)).each do |c|
-            puts "LOADING UP #{c}"
             Rails.env.production? ? require(c) : load(c)
           end
         end

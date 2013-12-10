@@ -1,0 +1,32 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:unavailable_products) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= link_to_with_icon 'icon-arrow-left', Spree.t(:back_to_reports_list), spree.admin_reports_url, :class => 'button' %></li>
+<% end %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:advanced_reporting_create_date) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <%= render :partial => 'spree/admin/shared/advanced_reporting/report_criteria', :locals => {url: spree.unavailable_products_admin_reports_path} %>
+<% end %>
+
+<table class="admin-report" data-hook="unavailable_products">
+  <thead>
+    <tr>
+      <th><%= Spree.t(:advanced_reporting_id) %></th>
+      <th><%= Spree.t(:advanced_reporting_name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr class="align-center">
+        <td><%= product.id %></td>
+        <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,7 @@
 en:
-  advanced_reports:
-    unavailable_products:
-      name: Unavailable Products
-      description: A list of all unavailable products by most recently created.
+  spree:
+    unavailable_products: Unavailable Products
+    unavailable_products_description: A list of all current products with no availability date.
+    advanced_reporting_id: ID
+    advanced_reporting_name: Name
+    advanced_reporting_create_date: Create Date

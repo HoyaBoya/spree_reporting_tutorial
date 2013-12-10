@@ -1,22 +1,30 @@
-require_dependency 'spree/admin/reports_controller'
-
 Spree::Admin::ReportsController.class_eval do
-  ADVANCED_REPORTS = [:unavailable_products]
+  before_filter :advanced_report_setup, only: [:index]
 
   def unavailable_products
+    params[:q] = {} unless params[:q]
 
-  end
-
-  private 
-
-  def self.init_decorator!
-    advanced_reports = {}
-    ADVANCED_REPORTS.each do |report|
-      advanced_reports[report] = {name: I18n.t("advanced_reports.#{report}.name"), :description => I18n.t("advanced_reports.#{report}.description")}
+    if params[:q][:created_at_gt].blank?
+      params[:q][:created_at_gt] = Time.zone.now.beginning_of_month
+    else
+      params[:q][:created_at_gt] = Time.zone.parse(params[:q][:created_at_gt]).beginning_of_day rescue Time.zone.now.beginning_of_month
     end
 
-    Spree::Admin::ReportsController::AVAILABLE_REPORTS.merge!(advanced_reports)
+    if params[:q] && !params[:q][:created_at_lt].blank?
+      params[:q][:created_at_lt] = Time.zone.parse(params[:q][:created_at_lt]).end_of_day rescue ""
+    end
+
+    params[:q][:available_on_null] = true
+
+    params[:q][:s] ||= "created_at desc"
+
+    @search = Spree::Product.ransack(params[:q])
+    @products = @search.result
   end
 
-  self.init_decorator!
+  protected
+
+  def advanced_report_setup
+    Spree::Admin::ReportsController.add_available_report! :unavailable_products
+  end
 end
