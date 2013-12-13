@@ -1,13 +1,7 @@
-Spree Advanced Reporting
+Spree Reporting Tutorial
 ========================
 
-This is a gem that serves as the basic framework to add new reports to Spree Admin.
-
-NOTE: 
-
-This gem requires that the following pull request be accepted into Spree Core.
-
-https://github.com/spree/spree/pull/4087
+This is a gem that serves as a tutorial to add new reports to Spree Admin. It adds a simple report "Unavailable Products" to the existing "Sales Total" report that comes from a basic Spree installation.
 
 Running Tests
 =============
@@ -89,3 +83,5 @@ end
 ```
 
 4) Build the report template. This is your standard ERB happiness!
+
+5) Write tests. There are sample tests derived from the "Sales Total" tests in Spree Core.
